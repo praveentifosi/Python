@@ -1,0 +1,78 @@
+#to print mean of values
+def mean(values):
+    return float(sum(values)/len(values))
+mean([10,6,4,4,6,4,1])
+
+#Next
+
+import numpy as np 
+
+x = [1,2,3,4]
+print(np.mean(x))
+
+#median of a number
+def median(arr):
+    sarr = sorted(arr)
+    if len(sarr)%2==1:
+        mid = ((len(sarr)+1)//2)-1
+        return sarr[mid]
+    elif len(sarr)%2==0:
+        mid = ((len(sarr)+1)//2)-1
+        x = sarr[mid]+sarr[mid+1]
+        y=x/2
+        return y
+    else:
+        return 0
+    
+median([8,5,8,4,8,12,13,5,9])
+
+#Next
+
+from itertools import groupby
+def mode(arr):
+    def last(n): return n[-1]
+    counter = Counter(arr)
+    x=counter.items()
+    max_elem = max(x,key=last)
+    return max_elem[0]
+
+mode([1,2,2,2,3,3])
+
+
+So, when is the skewness too much?
+The rule of thumb seems to be:
+If the skewness is between -0.5 and 0.5, the data are fairly symmetrical.
+If the skewness is between -1 and -0.5(negatively skewed) or between 0.5 and 1(positively skewed), the data are moderately skewed.
+If the skewness is less than -1(negatively skewed) or greater than 1(positively skewed), the data are highly skewed.
+
+#skeweness and normal distribution
+%matplotlib inline
+import numpy as np
+import pandas as pd
+from scipy.stats import kurtosis
+from scipy.stats import skew
+
+import matplotlib.pyplot as plt
+
+plt.style.use('ggplot')
+
+data = np.random.normal(0, 1, 10000)
+np.var(data)
+
+plt.hist(data, bins=60)
+
+print("mean : ", np.mean(data))
+print("var  : ", np.var(data))
+print("skew : ",skew(data))
+print("kurt : ",kurtosis(data))
+
+#Next
+
+About kurtosis
+1_Nqu07THa7APRTOF7kaVr5Q.jpeg
+
+Mesokurtic: This distribution has kurtosis statistic similar to that of the normal distribution. It means that the extreme values of the distribution are similar to that of a normal distribution characteristic. This definition is used so that the standard normal distribution has a kurtosis of three.
+Leptokurtic (Kurtosis > 3): Distribution is longer, tails are fatter. Peak is higher and sharper than Mesokurtic, which means that data are heavy-tailed or profusion of outliers.
+Outliers stretch the horizontal axis of the histogram graph, which makes the bulk of the data appear in a narrow (“skinny”) vertical range, thereby giving the “skinniness” of a leptokurtic distribution.
+Platykurtic: (Kurtosis < 3): Distribution is shorter, tails are thinner than the normal distribution. The peak is lower and broader than Mesokurtic, which means that data are light-tailed or lack of outliers.
+The reason for this is because the extreme values are less than that of the normal distribution.¶
